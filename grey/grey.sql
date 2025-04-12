@@ -26,14 +26,15 @@ CREATE TABLE IF NOT EXISTS `cita` (
   PRIMARY KEY (`id`),
   KEY `id_paciente` (`id_paciente`) USING BTREE,
   CONSTRAINT `cita_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla grey.cita: ~4 rows (aproximadamente)
 INSERT INTO `cita` (`id`, `id_paciente`, `fecha_cita`, `turno`, `estado`, `tipo_cita_id`, `observaciones`) VALUES
 	(3, 3, '2025-04-09 17:02:41', 'tarde', 'completado', 3, 'jhvhasxasxvsxvxgvsxvsgvxgvsxgvasx'),
 	(4, 4, '2025-04-09 17:02:41', 'tarde', 'pendiente', 4, '2122232323212'),
 	(7, 4, '2025-04-10 18:08:15', 'Tarde', 'completado', 4, 'dfgdfgdfgdfgfd'),
-	(8, 3, '2025-04-10 18:08:15', 'tarde', 'completado', 2, 'fgdfgdfgdgfdg');
+	(8, 3, '2025-04-10 18:08:15', 'tarde', 'completado', 2, 'fgdfgdfgdgfdg'),
+	(9, 3, '2025-04-12 10:55:00', 'manana', 'pendiente', 1, 'wrerwerw');
 
 -- Volcando estructura para tabla grey.consultas_medicas
 CREATE TABLE IF NOT EXISTS `consultas_medicas` (
@@ -45,14 +46,15 @@ CREATE TABLE IF NOT EXISTS `consultas_medicas` (
   KEY `id_cita` (`id_cita`),
   CONSTRAINT `consultas_medicas_ibfk_1` FOREIGN KEY (`id_medico`) REFERENCES `medico` (`id`),
   CONSTRAINT `consultas_medicas_ibfk_3` FOREIGN KEY (`id_cita`) REFERENCES `cita` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla grey.consultas_medicas: ~4 rows (aproximadamente)
 INSERT INTO `consultas_medicas` (`id`, `id_medico`, `id_cita`) VALUES
 	(13, 6, 3),
 	(14, 5, 4),
 	(15, 5, 7),
-	(16, 5, 8);
+	(16, 5, 8),
+	(17, 5, 9);
 
 -- Volcando estructura para tabla grey.historial_medico
 CREATE TABLE IF NOT EXISTS `historial_medico` (
@@ -69,12 +71,12 @@ CREATE TABLE IF NOT EXISTS `historial_medico` (
   KEY `id_paciente` (`id_paciente`),
   CONSTRAINT `historial_medico_ibfk_1` FOREIGN KEY (`id_consultas_medicas`) REFERENCES `consultas_medicas` (`id`),
   CONSTRAINT `historial_medico_ibfk_2` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla grey.historial_medico: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla grey.historial_medico: ~1 rows (aproximadamente)
 INSERT INTO `historial_medico` (`id`, `id_consultas_medicas`, `id_paciente`, `fecha_registro`, `diagnostico`, `tratamiento`, `observaciones`, `img`) VALUES
-	(27, 16, 3, '2025-04-11 15:13:02', 'xxxxxxxxx', 'xxxxxxxxxxxxxxxxx', 'xxxxxxxxxxxxxxxxxx', '/uploads/archivo-1744398782809-673608826.pdf'),
-	(31, 15, 4, '2025-04-11 17:24:54', 'ccccccccccccccccccc', 'ccwwwwwwwwwwwwwwwwwwww', 'zzzzzzzzzzzzzzzzz', '/uploads/archivo-1744406694224-381757088.pdf');
+	(27, 16, 3, '2025-04-11 15:13:02', 'wwwwwwwwwwwww', 'xxxxxxxxxxxxxxxxx', 'xxxxxxxxxxxxxxxxxx', '/uploads/archivo-1744398782809-673608826.pdf'),
+	(33, 15, 4, '2025-04-12 11:07:06', 'rtrtrteret', 'tertter', 'rtetr', NULL);
 
 -- Volcando estructura para tabla grey.medico
 CREATE TABLE IF NOT EXISTS `medico` (
@@ -86,14 +88,15 @@ CREATE TABLE IF NOT EXISTS `medico` (
   `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   `password` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Volcando datos para la tabla grey.medico: ~4 rows (aproximadamente)
 INSERT INTO `medico` (`id`, `nombre`, `apellido`, `especialidad`, `telefono`, `email`, `password`) VALUES
 	(5, 'Roberto', 'Siracosa', 'Urologo', '0414-3497390', 'roberto@email.com', '123456'),
 	(6, 'Maria', 'Viratti', 'Cardiologo', '0414-3497398', 'maria@email.com', '123456'),
 	(7, 'Ronald', 'Melendez', 'cardiologo', '04124026782', 'ronald@email.com', '123456'),
-	(8, 'Pepe', 'Trueno', 'urologo', '123456789', 'pepe@email.com', '123456');
+	(8, 'Pepe', 'Trueno', 'urologo', '123456789', 'pepe@email.com', '123456'),
+	(9, 'jhon', 'ccccc', 'urologo', '7778888', 'jhon@email.com', '123456');
 
 -- Volcando estructura para tabla grey.paciente
 CREATE TABLE IF NOT EXISTS `paciente` (
